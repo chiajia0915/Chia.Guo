@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHIA GUO 郭润家</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@300;400;700&family=Noto+Serif+SC:wght@300;400;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #0e0c09;
+  --cream: #f2ede4;
+  --paper: #e8e1d5;
+  --grey: #8a8070;
+  --rust: #c4420a;
+  --mid: #3a3530;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--ink);
+  color: var(--cream);
+  font-family: 'IBM Plex Mono', monospace;
+  overflow-x: hidden;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 56px;
+  background: linear-gradient(to bottom, rgba(14,12,9,0.96) 0%, transparent 100%);
+}
+.nav-logo { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:var(--cream); text-decoration:none; }
+.nav-logo span { font-style:italic; font-weight:400; color:var(--grey); font-size:14px; margin-left:8px; }
+.nav-links { display:flex; gap:36px; list-style:none; }
+.nav-links a { font-size:9px; letter-spacing:.3em; text-transform:uppercase; color:var(--grey); text-decoration:none; transition:color .25s; }
+.nav-links a:hover { color:var(--cream); }
+
+/* HERO */
+#hero { min-height:100vh; display:grid; grid-template-columns:55% 45%; position:relative; overflow:hidden; }
+.hero-left { position:relative; background:#0b0908; overflow:hidden; }
+.hero-portrait-ph {
+  width:100%; height:100%; min-height:100vh;
+  background: linear-gradient(160deg,#181410 0%,#0e0c09 100%);
+  display:flex; align-items:center; justify-content:center;
+  font-size:9px; letter-spacing:.3em; color:#1a1810;
+}
+.hero-left::after {
+  content:''; position:absolute; top:0; right:-2px; bottom:0; width:60px;
+  background:var(--ink);
+  clip-path:polygon(60px 0,60px 100%,20px 95%,45px 85%,10px 75%,50px 65%,5px 50%,55px 38%,15px 25%,40px 10%,60px 0);
+}
+.hero-stamp {
+  position:absolute; top:120px; left:40px;
+  background:var(--rust); color:var(--cream);
+  font-size:9px; font-weight:700; letter-spacing:.35em; text-transform:uppercase;
+  padding:6px 14px; transform:rotate(-2deg); z-index:10;
+}
+.hero-year {
+  position:absolute; bottom:48px; left:40px;
+  font-family:'Playfair Display',serif; font-size:110px; font-weight:900;
+  color:rgba(242,237,228,0.05); line-height:1; user-select:none; z-index:1;
+}
+.hero-right { display:flex; flex-direction:column; justify-content:center; padding:120px 56px 80px 64px; position:relative; }
+.hero-ticket {
+  position:absolute; top:80px; right:0; width:100%;
+  border-top:1px dashed #2a2620; padding-top:12px;
+  font-size:8px; letter-spacing:.4em; text-transform:uppercase; color:#2a2620;
+  padding-right:56px; text-align:right;
+}
+.hero-eyebrow { font-size:9px; letter-spacing:.4em; text-transform:uppercase; color:var(--rust); margin-bottom:20px; opacity:0; animation:rise .9s ease forwards .2s; }
+.hero-name { font-family:'Playfair Display',serif; font-size:clamp(56px,7vw,92px); font-weight:900; line-height:.9; letter-spacing:-.02em; margin-bottom:4px; opacity:0; animation:rise .9s ease forwards .4s; }
+.hero-name-cn { font-family:'Noto Serif SC',serif; font-size:clamp(22px,2.5vw,32px); font-weight:300; color:var(--grey); margin-bottom:40px; letter-spacing:.15em; opacity:0; animation:rise .9s ease forwards .6s; }
+.hero-rule { width:100%; height:1px; background:#2a2620; margin-bottom:32px; opacity:0; animation:rise .9s ease forwards .7s; }
+.hero-tagline { font-family:'DM Serif Display',serif; font-size:clamp(17px,2vw,22px); font-style:italic; line-height:1.55; color:var(--cream); margin-bottom:12px; opacity:0; animation:rise .9s ease forwards .8s; }
+.hero-tagline-cn { font-family:'Noto Serif SC',serif; font-size:12px; font-weight:300; color:var(--grey); line-height:2; margin-bottom:48px; opacity:0; animation:rise .9s ease forwards 1s; }
+.hero-badges { display:flex; flex-wrap:wrap; gap:8px; opacity:0; animation:rise .9s ease forwards 1.1s; }
+.badge { font-size:8px; letter-spacing:.25em; text-transform:uppercase; padding:7px 14px; border:1px solid #2a2620; color:var(--grey); transition:all .25s; }
+.badge:hover { border-color:var(--cream); color:var(--cream); }
+.badge.accent { background:var(--rust); border-color:var(--rust); color:var(--cream); }
+
+/* SECTIONS */
+section { padding:100px 0; }
+.container { max-width:1200px; margin:0 auto; padding:0 56px; }
+.sec-head { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:20px; margin-bottom:72px; }
+.sec-num { font-family:'Playfair Display',serif; font-size:72px; font-weight:900; color:#1a1710; line-height:1; user-select:none; }
+.sec-title { font-family:'Playfair Display',serif; font-size:clamp(30px,3.5vw,48px); font-weight:700; }
+.sec-title em { font-weight:400; font-style:italic; color:var(--grey); }
+.sec-title-cn { font-family:'Noto Serif SC',serif; font-size:13px; font-weight:300; color:var(--grey); letter-spacing:.2em; text-align:right; }
+.sec-rule { grid-column:1/-1; height:1px; background:#1e1c18; margin-top:-48px; }
+
+/* ABOUT */
+#about { background:#0b0a07; }
+.about-layout { display:grid; grid-template-columns:3fr 2fr; gap:80px; align-items:start; }
+.about-pull { font-family:'DM Serif Display',serif; font-size:clamp(20px,2.2vw,28px); font-style:italic; line-height:1.5; color:var(--cream); margin-bottom:32px; padding-bottom:32px; border-bottom:1px solid #1e1c18; }
+.about-body { font-size:11px; line-height:2.1; color:var(--grey); }
+.about-body strong { color:var(--cream); font-weight:400; }
+.ticket-strip { margin-top:48px; background:var(--paper); padding:32px 40px; clip-path:polygon(0 6px,12px 0,24px 5px,36px 0,48px 6px,60px 0,100% 0,100% 100%,60px 100%,48px 95%,36px 100%,24px 94%,12px 100%,0 100%); }
+.ticket-strip-label { font-size:8px; letter-spacing:.35em; text-transform:uppercase; color:var(--mid); margin-bottom:20px; }
+.ticket-clients { display:flex; flex-wrap:wrap; gap:6px 20px; }
+.ticket-client { font-family:'Playfair Display',serif; font-size:15px; font-weight:700; color:var(--ink); }
+.about-details { display:flex; flex-direction:column; }
+.detail-row { padding:20px 0; border-bottom:1px solid #1a1810; }
+.detail-row:first-child { border-top:1px solid #1a1810; }
+.detail-key { font-size:8px; letter-spacing:.35em; text-transform:uppercase; color:var(--rust); margin-bottom:8px; }
+.detail-val { font-size:11px; line-height:1.9; color:var(--grey); }
+.detail-val strong { color:var(--cream); font-weight:400; }
+
+/* CREDENTIALS */
+#credentials { background:var(--ink); }
+.cred-trio { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:#1a1810; margin-bottom:64px; }
+.cred-block { background:var(--ink); padding:40px 32px; position:relative; overflow:hidden; }
+.cred-block::before { content:attr(data-n); position:absolute; top:-10px; right:16px; font-family:'Playfair Display',serif; font-size:80px; font-weight:900; color:#141210; line-height:1; pointer-events:none; }
+.cred-role { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; margin-bottom:6px; line-height:1.2; }
+.cred-org { font-size:8px; letter-spacing:.3em; text-transform:uppercase; color:var(--rust); margin-bottom:20px; }
+.cred-desc { font-size:11px; line-height:1.9; color:var(--grey); }
+.awards-head { font-size:8px; letter-spacing:.4em; text-transform:uppercase; color:var(--grey); margin-bottom:24px; padding-bottom:16px; border-bottom:1px dashed #1e1c18; }
+.award-row { display:grid; grid-template-columns:1fr auto; gap:24px; align-items:baseline; padding:18px 0; border-bottom:1px solid #111008; transition:padding-left .25s; }
+.award-row:hover { padding-left:10px; }
+.award-main { font-family:'DM Serif Display',serif; font-size:17px; font-style:italic; color:var(--cream); margin-bottom:3px; }
+.award-sub { font-size:10px; color:var(--grey); }
+.award-badge { font-size:8px; letter-spacing:.2em; text-transform:uppercase; color:var(--rust); white-space:nowrap; }
+.advantage-card { margin-top:56px; border:1px solid #1e1c18; padding:48px 48px 40px; position:relative; background:#0a0908; }
+.advantage-card::before { content:'"'; position:absolute; top:-28px; left:32px; font-family:'Playfair Display',serif; font-size:90px; font-weight:900; color:var(--rust); line-height:1; }
+.advantage-text { font-family:'DM Serif Display',serif; font-size:clamp(16px,1.8vw,20px); font-style:italic; line-height:1.65; color:var(--cream); padding-left:24px; border-left:2px solid var(--rust); }
+.advantage-attr { font-size:8px; letter-spacing:.3em; text-transform:uppercase; color:#2a2620; margin-top:20px; padding-left:24px; }
+
+/* WORKS */
+#works { background:#0b0a07; }
+.works-grid { display:grid; grid-template-columns:repeat(12,1fr); grid-auto-rows:200px; gap:3px; padding:0 56px; }
+.wcard:nth-child(1) { grid-column:span 7; grid-row:span 2; }
+.wcard:nth-child(2) { grid-column:span 5; grid-row:span 1; }
+.wcard:nth-child(3) { grid-column:span 5; grid-row:span 1; }
+.wcard:nth-child(4) { grid-column:span 4; grid-row:span 2; }
+.wcard:nth-child(5) { grid-column:span 4; grid-row:span 2; }
+.wcard:nth-child(6) { grid-column:span 4; grid-row:span 2; }
+.wcard:nth-child(7) { grid-column:span 6; grid-row:span 1; }
+.wcard:nth-child(8) { grid-column:span 6; grid-row:span 1; }
+.wcard { position:relative; overflow:hidden; }
+.wcard-bg { position:absolute; inset:0; transition:transform .6s ease; }
+.wcard:hover .wcard-bg { transform:scale(1.05); }
+.wcard-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(14,12,9,.97) 0%,rgba(14,12,9,.3) 60%,transparent 100%); display:flex; flex-direction:column; justify-content:flex-end; padding:24px 28px; }
+.wcard-client { font-size:8px; letter-spacing:.35em; text-transform:uppercase; color:var(--rust); margin-bottom:6px; }
+.wcard-title { font-family:'Playfair Display',serif; font-size:clamp(14px,1.8vw,22px); font-weight:700; line-height:1.2; margin-bottom:8px; }
+.wcard-meta { font-size:9px; color:var(--grey); }
+.wcard-role { position:absolute; top:16px; right:16px; font-size:7px; letter-spacing:.2em; text-transform:uppercase; background:rgba(14,12,9,.85); color:var(--grey); padding:5px 10px; border:1px solid #2a2620; }
+.wcard-watch { position:absolute; inset:0; background:rgba(14,12,9,.9); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .35s; text-decoration:none; flex-direction:column; gap:12px; }
+.wcard:hover .wcard-watch { opacity:1; }
+.watch-icon { width:52px; height:52px; border:1px solid var(--cream); border-radius:50%; display:flex; align-items:center; justify-content:center; }
+.watch-icon svg { fill:var(--cream); }
+.watch-label { font-size:9px; letter-spacing:.3em; text-transform:uppercase; color:var(--cream); }
+
+/* DIRECTOR */
+#director { background:var(--ink); }
+.dir-intro { font-family:'DM Serif Display',serif; font-size:clamp(18px,2vw,24px); font-style:italic; color:var(--grey); max-width:680px; line-height:1.65; margin-bottom:64px; border-left:2px solid #1e1c18; padding-left:28px; }
+.dir-intro strong { color:var(--cream); font-style:normal; }
+.film-row { display:grid; grid-template-columns:2fr 1fr 1fr; gap:32px; align-items:start; padding:40px 0; border-bottom:1px solid #111008; transition:all .25s; }
+.film-row:hover { background:#0a0908; margin:0 -24px; padding:40px 24px; }
+.film-cn { font-family:'Noto Serif SC',serif; font-size:26px; font-weight:700; margin-bottom:4px; }
+.film-en { font-family:'DM Serif Display',serif; font-size:14px; font-style:italic; color:var(--grey); margin-bottom:12px; }
+.film-dir-role { font-size:8px; letter-spacing:.3em; text-transform:uppercase; color:var(--rust); margin-bottom:12px; }
+.film-link { display:inline-block; font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--cream); text-decoration:none; border-bottom:1px solid #2a2620; padding-bottom:2px; transition:border-color .25s; }
+.film-link:hover { border-color:var(--cream); }
+.fest-item { font-size:10px; color:var(--grey); line-height:1.7; padding-left:12px; border-left:1px solid #1e1c18; margin-bottom:8px; }
+.fest-item strong { color:var(--cream); font-weight:400; display:block; }
+.sound-row { margin-top:56px; padding:40px; background:#0a0908; border:1px solid #1a1810; }
+.sound-head { font-size:8px; letter-spacing:.4em; text-transform:uppercase; color:var(--grey); margin-bottom:32px; }
+.sound-films { display:grid; grid-template-columns:repeat(3,1fr); gap:32px; }
+.sound-film-title { font-family:'Noto Serif SC',serif; font-size:18px; font-weight:300; margin-bottom:6px; }
+.sound-role-tag { font-size:9px; color:var(--rust); letter-spacing:.15em; margin-bottom:12px; }
+.sound-fests { font-size:10px; color:var(--grey); line-height:2; }
+
+/* CONTACT */
+#contact { background:var(--paper); color:var(--ink); }
+.contact-wrap { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+.contact-big { font-family:'Playfair Display',serif; font-size:clamp(40px,5vw,64px); font-weight:900; line-height:1.05; }
+.contact-big em { font-weight:400; font-style:italic; color:var(--mid); }
+.contact-note { font-size:11px; line-height:2; color:var(--mid); margin-top:24px; }
+.contact-fields { display:flex; flex-direction:column; }
+.cfield { padding:22px 0; border-bottom:1px solid #d0c8bc; }
+.cfield:first-child { border-top:1px solid #d0c8bc; }
+.cfield-label { font-size:8px; letter-spacing:.35em; text-transform:uppercase; color:var(--mid); margin-bottom:6px; }
+.cfield-val { font-family:'Playfair Display',serif; font-size:18px; color:var(--ink); text-decoration:none; display:block; transition:color .25s; }
+.cfield-val:hover { color:var(--rust); }
+
+/* FOOTER */
+footer { background:var(--ink); padding:28px 56px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid #1a1810; }
+.footer-l { font-family:'Playfair Display',serif; font-size:13px; color:#3a3530; }
+.footer-r { font-size:8px; letter-spacing:.2em; color:#2a2620; text-transform:uppercase; }
+
+/* ANIMATIONS */
+@keyframes rise { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.reveal { opacity:0; transform:translateY(28px); transition:opacity .75s ease,transform .75s ease; }
+.reveal.in { opacity:1; transform:translateY(0); }
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:20px 24px;} .nav-links{display:none;}
+  #hero{grid-template-columns:1fr;} .hero-left{display:none;}
+  .hero-right{padding:120px 28px 80px;}
+  .container{padding:0 28px;}
+  .about-layout{grid-template-columns:1fr;gap:48px;}
+  .cred-trio{grid-template-columns:1fr;}
+  .works-grid{padding:0 28px;grid-template-columns:1fr 1fr;grid-auto-rows:220px;}
+  .wcard:nth-child(n){grid-column:span 2;grid-row:span 1;}
+  .film-row{grid-template-columns:1fr;}
+  .contact-wrap{grid-template-columns:1fr;gap:48px;}
+  .sound-films{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">CHIA GUO <span>郭润家</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">Profile</a></li>
+    <li><a href="#credentials">Credits</a></li>
+    <li><a href="#works">Works</a></li>
+    <li><a href="#director">Films</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-portrait-ph">PORTRAIT · 替换为你的照片</div>
+    <div class="hero-stamp">Producer / Director</div>
+    <div class="hero-year">25</div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-ticket">Radical Media · Shanghai · Europe · Southeast Asia</div>
+    <p class="hero-eyebrow">Portfolio · 作品集</p>
+    <h1 class="hero-name">CHIA<br>GUO</h1>
+    <p class="hero-name-cn">郭润家</p>
+    <div class="hero-rule"></div>
+    <p class="hero-tagline">A director's instinct.<br>A producer's discipline.</p>
+    <p class="hero-tagline-cn">具备导演视角的国际制片人<br>全链路执行 · 跨越欧亚</p>
+    <div class="hero-badges">
+      <span class="badge accent">Radical Media</span>
+      <span class="badge">Producer</span>
+      <span class="badge">1st AD</span>
+      <span class="badge">Director</span>
+      <span class="badge">Shanghai</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-num">01</span>
+      <h2 class="sec-title">Profile <em>简介</em></h2>
+      <span class="sec-title-cn">Producer · Director · 1st AD</span>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="about-layout">
+      <div class="reveal">
+        <p class="about-pull">"I produce films the way a director thinks about them — with full creative accountability and the operational precision to deliver."</p>
+        <p class="about-body">
+          毕业于<strong>中国传媒大学</strong>，现任职于北美国际制片公司 <strong>Radical Media 上海办公室</strong>，担任制片人及第一副导演。<br><br>
+          具备从项目立项、创意提报、预算管理到后期结算的<strong>全流程工作能力</strong>，曾主导多个中大型影片及平面制作项目。除制片经历外，拥有导演经历及国际 4A 广告公司创意管培生经验，深度了解广告上下游制作全链条。<br><br>
+          作为国际影展入围的独立导演及签约乐队音乐人，他对视觉与听觉有着敏锐的审美，<strong>商业与个人创作的双重视角</strong>使其在商业影像制作领域具备独特优势。<br><br>
+          入行 3 年，国际足迹遍布<strong>欧洲、东南亚及中国各大城市</strong>，可快速组建跨国制作团队。
+        </p>
+        <div class="ticket-strip" style="margin-top:48px;">
+          <p class="ticket-strip-label">Selected Clients · 合作客户</p>
+          <div class="ticket-clients">
+            <span class="ticket-client">ARC'TERYX</span>
+            <span class="ticket-client">Salomon</span>
+            <span class="ticket-client">NIKE</span>
+            <span class="ticket-client">OPPO</span>
+            <span class="ticket-client">OnePlus</span>
+            <span class="ticket-client">Canon</span>
+            <span class="ticket-client">ByteDance</span>
+            <span class="ticket-client">正官庄</span>
+            <span class="ticket-client">天然博士</span>
+            <span class="ticket-client">汤臣倍健</span>
+            <span class="ticket-client">GEMO金茉</span>
+            <span class="ticket-client">三顿半咖啡</span>
+            <span class="ticket-client">岚图汽车</span>
+            <span class="ticket-client">老庙黄金</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-details reveal">
+        <div class="detail-row"><p class="detail-key">Current · 现职</p><p class="detail-val"><strong>Producer & 1st AD</strong><br>Radical Media — Shanghai</p></div>
+        <div class="detail-row"><p class="detail-key">Previous · 过往</p><p class="detail-val"><strong>Dentsu Z</strong><br>Creative Trainee · 汇报至CEO<br><br><strong>飞狗厂牌 · 安可福莱</strong><br>主唱 · 吉他手 · 制作人</p></div>
+        <div class="detail-row"><p class="detail-key">Capabilities · 能力</p><p class="detail-val">Producer · Post Producer<br>Print Producer<br>1st Assistant Director<br>Director · AIGC Production</p></div>
+        <div class="detail-row"><p class="detail-key">Network · 资源</p><p class="detail-val">US · DE · FR · CA · NZ<br>Serbia · Thailand · Malaysia<br>协拍 · 后期 · 导演 · 摄影师</p></div>
+        <div class="detail-row"><p class="detail-key">Languages · 语言</p><p class="detail-val">中文（母语）<br>English（流利）<br>日本語（基础）</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section id="credentials">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-num">02</span>
+      <h2 class="sec-title">Credentials <em>资历</em></h2>
+      <span class="sec-title-cn">Experience · Awards · Recognition</span>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="cred-trio reveal">
+      <div class="cred-block" data-n="I">
+        <h3 class="cred-role">Producer<br>& 1st AD</h3>
+        <p class="cred-org">Radical Media · Shanghai</p>
+        <p class="cred-desc">北美顶级制作公司上海驻场制片人。全链路项目管理，协作品牌方、代理公司及国际导演团队。跨越法国、泰国、塞尔维亚、云南等多地现场执行。</p>
+      </div>
+      <div class="cred-block" data-n="II">
+        <h3 class="cred-role">Creative<br>Trainee</h3>
+        <p class="cred-org">Dentsu Z · Report to CEO</p>
+        <p class="cred-desc">曾任职日本国际 4A 电通创意管培生团队，汇报级别直达 CEO，深度参与品牌创意策略与广告制作全链条，积累系统性行业认知。</p>
+      </div>
+      <div class="cred-block" data-n="III">
+        <h3 class="cred-role">Director<br>& Musician</h3>
+        <p class="cred-org">Independent · 飞狗厂牌</p>
+        <p class="cred-desc">独立导演，作品入围多个国际电影节，包括布鲁塞尔最佳国际导演、北京国际电影节等。同时作为签约乐队主唱、吉他手及制作人，具备跨媒介创作能力。</p>
+      </div>
+    </div>
+    <div class="reveal">
+      <p class="awards-head">Film Festival Recognition · 电影节荣誉</p>
+      <div class="award-row"><div><p class="award-main">Clermont-Ferrand Short Film Festival</p><p class="award-sub">法国克莱蒙费朗国际电影节 — 市场单元收录</p></div><span class="award-badge">Director</span></div>
+      <div class="award-row"><div><p class="award-main">BRUSSELS International CINEVERSE</p><p class="award-sub">最佳国际短片 · 最佳国际导演</p></div><span class="award-badge">Director</span></div>
+      <div class="award-row"><div><p class="award-main">13th MSIFF — Mumbai Shorts International</p><p class="award-sub">孟买国际短片电影节主竞赛 — 最佳短片荣誉</p></div><span class="award-badge">Director</span></div>
+      <div class="award-row"><div><p class="award-main">BIFF · Beijing College Student Film Festival</p><p class="award-sub">北京国际电影节主单元 — Official Selection 2022</p></div><span class="award-badge">Director</span></div>
+      <div class="award-row"><div><p class="award-main">澳门国际电影节 MIMF 2024</p><p class="award-sub">社会组 荣誉入选 · Official Selection</p></div><span class="award-badge">Director</span></div>
+      <div class="award-row"><div><p class="award-main">VITA Shorts · 北京国际电影节</p><p class="award-sub">主竞赛 Final List 年度十佳</p></div><span class="award-badge">Director</span></div>
+      <div class="award-row"><div><p class="award-main">NIIFF 2023 — Viewer's Choice</p><p class="award-sub">瓦子影像周 观众选择大奖 · 中国影视学会荣誉</p></div><span class="award-badge">Director</span></div>
+      <div class="award-row"><div><p class="award-main">2022 南京FBS新青年剧本创投会</p><p class="award-sub">获官方创投扶持</p></div><span class="award-badge">Screenwriter</span></div>
+    </div>
+    <div class="advantage-card reveal">
+      <p class="advantage-text">
+        These festival credits aren't a detour from production work — they're what make me a different kind of producer. I know what a director needs before they ask for it.
+        <br><br>
+        <span style="font-family:'Noto Serif SC',serif;font-size:13px;font-style:normal;color:var(--grey);">这些电影节经历不是制片路上的弯路——而是让我成为更好制片人的核心原因。我知道导演在想什么，不需要他们开口。</span>
+      </p>
+      <p class="advantage-attr">— On the director-producer advantage</p>
+    </div>
+  </div>
+</section>
+
+<!-- WORKS -->
+<section id="works">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-num">03</span>
+      <h2 class="sec-title">Works <em>商业作品</em></h2>
+      <span class="sec-title-cn">Brand Films · TVC · Documentary · Print</span>
+      <div class="sec-rule"></div>
+    </div>
+  </div>
+  <div class="works-grid reveal">
+    <div class="wcard">
+      <div class="wcard-bg" style="background:linear-gradient(160deg,#0a1520,#1a2f45,#0d1f30);"></div>
+      <div class="wcard-role">Producer · Post Producer</div>
+      <a class="wcard-watch" href="#" target="_blank">
+        <div class="watch-icon"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M6 3l8 5-8 5V3z"/></svg></div>
+        <span class="watch-label">Watch Film</span>
+      </a>
+      <div class="wcard-overlay">
+        <p class="wcard-client">ARC'TERYX × 杨小华</p>
+        <h3 class="wcard-title">她如流而上 <span style="font-style:italic;font-size:.7em;color:var(--grey)">She Flows Out There</span></h3>
+        <p class="wcard-meta">品牌纪录片 · 13:14 · 法国霞慕尼</p>
+      </div>
+    </div>
+    <div class="wcard">
+      <div class="wcard-bg" style="background:linear-gradient(160deg,#0d2015,#1a3520);"></div>
+      <div class="wcard-role">Producer · Post Producer</div>
+      <a class="wcard-watch" href="#" target="_blank">
+        <div class="watch-icon"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M6 3l8 5-8 5V3z"/></svg></div>
+        <span class="watch-label">Watch Film</span>
+      </a>
+      <div class="wcard-overlay">
+        <p class="wcard-client">ARC'TERYX × 李美妮</p>
+        <h3 class="wcard-title">她如流而上</h3>
+        <p class="wcard-meta">品牌纪录片 · 13:07 · 泰国甲米</p>
+      </div>
+    </div>
+    <div class="wcard">
+      <div class="wcard-bg" style="background:linear-gradient(160deg,#1a1000,#2a1800);"></div>
+      <div class="wcard-role">Producer · Post Producer</div>
+      <a class="wcard-watch" href="#" target="_blank">
+        <div class="watch-icon"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M6 3l8 5-8 5V3z"/></svg></div>
+        <span class="watch-label">Watch Film</span>
+      </a>
+      <div class="wcard-overlay">
+        <p class="wcard-client">OPPO</p>
+        <h3 class="wcard-title">Find X8 Pro</h3>
+        <p class="wcard-meta">品牌片 · 1min · 塞尔维亚贝尔格莱德</p>
+      </div>
+    </div>
+    <div class="wcard">
+      <div class="wcard-bg" style="background:linear-gradient(160deg,#100f08,#1e1c10);"></div>
+      <div class="wcard-role">Producer</div>
+      <a class="wcard-watch" href="#" target="_blank">
+        <div class="watch-icon"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M6 3l8 5-8 5V3z"/></svg></div>
+        <span class="watch-label">Watch Film</span>
+      </a>
+      <div class="wcard-overlay">
+        <p class="wcard-client">SALOMON × 袁和平</p>
+        <h3 class="wcard-title">2026 CNY 茶马古道</h3>
+        <p class="wcard-meta">品牌TVC · 45s · 云南腾冲</p>
+      </div>
+    </div>
+    <div class="wcard">
+      <div class="wcard-bg" style="background:linear-gradient(160deg,#0a0015,#160025);"></div>
+      <div class="wcard-role">Producer · Post Producer</div>
+      <a class="wcard-watch" href="#" target="_blank">
+        <div class="watch-icon"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M6 3l8 5-8 5V3z"/></svg></div>
+        <span class="watch-label">Watch Film</span>
+      </a>
+      <div class="wcard-overlay">
+        <p class="wcard-client">OPPO</p>
+        <h3 class="wcard-title">Find X9 Pro</h3>
+        <p class="wcard-meta">品牌片 · 1min · 泰国曼谷</p>
+      </div>
+    </div>
+    <div class="wcard">
+      <div class="wcard-bg" style="background:linear-gradient(160deg,#150000,#250000);"></div>
+      <div class="wcard-role">Asst. Dir · B组导演</div>
+      <a class="wcard-watch" href="https://v.douyin.com/0HkR95krQrM/" target="_blank">
+        <div class="watch-icon"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M6 3l8 5-8 5V3z"/></svg></div>
+        <span class="watch-label">Watch Film</span>
+      </a>
+      <div class="wcard-overlay">
+        <p class="wcard-client">NIKE × Wieden+Kennedy</p>
+        <h3 class="wcard-title">Mission Rise 2025《打出名堂》</h3>
+        <p class="wcard-meta">系列纪录片 · 6支 · 12城市 · 100运动员</p>
+      </div>
+    </div>
+    <div class="wcard">
+      <div class="wcard-bg" style="background:linear-gradient(160deg,#050520,#0a0a35);"></div>
+      <div class="wcard-role">Creative Dir · AIGC</div>
+      <div class="wcard-overlay">
+        <p class="wcard-client">字节跳动 × 电通中国</p>
+        <h3 class="wcard-title">豆包大模型 12/18 发布会</h3>
+        <p class="wcard-meta">AIGC短片 · 24天从Brief到成片 · 电通全球推送</p>
+      </div>
+    </div>
+    <div class="wcard">
+      <div class="wcard-bg" style="background:linear-gradient(160deg,#150500,#220800);"></div>
+      <div class="wcard-role">1st AD · 执行导演</div>
+      <a class="wcard-watch" href="#" target="_blank">
+        <div class="watch-icon"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M6 3l8 5-8 5V3z"/></svg></div>
+        <span class="watch-label">Watch Film</span>
+      </a>
+      <div class="wcard-overlay">
+        <p class="wcard-client">Canon 佳能</p>
+        <h3 class="wcard-title">退休的老伴</h3>
+        <p class="wcard-meta">品牌TVC · 剧情短片 · 3min</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIRECTOR -->
+<section id="director">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-num">04</span>
+      <h2 class="sec-title">As Director <em>导演作品</em></h2>
+      <span class="sec-title-cn">Short Films · Music · Sound</span>
+      <div class="sec-rule"></div>
+    </div>
+    <p class="dir-intro reveal">My background as a filmmaker — selected at international festivals across <strong>Europe and Asia</strong> — is not separate from my production work. It's the reason I produce differently.</p>
+    <div class="reveal">
+      <div class="film-row">
+        <div>
+          <p class="film-cn">海风过暖</p>
+          <p class="film-en">Director · Screenwriter · Chia Guo</p>
+          <p class="film-dir-role">剧情短片 · 导演作品</p>
+          <a class="film-link" href="https://www.xinpianchang.com/a13006783?from=private_pwd" target="_blank">Watch on 新片场 →</a>
+        </div>
+        <div>
+          <div class="fest-item"><strong>Clermont-Ferrand</strong>法国克莱蒙费朗 市场单元</div>
+          <div class="fest-item"><strong>BRUSSELS CINEVERSE</strong>最佳国际短片 · 最佳国际导演</div>
+          <div class="fest-item"><strong>13th MSIFF Mumbai</strong>最佳短片荣誉</div>
+        </div>
+        <div>
+          <div class="fest-item"><strong>澳门MIMF 2024</strong>Official Selection</div>
+          <div class="fest-item"><strong>Passion Wave 2024</strong>Shortlisted</div>
+          <div class="fest-item"><strong>FBS2023 南京</strong>优质项目</div>
+        </div>
+      </div>
+      <div class="film-row">
+        <div>
+          <p class="film-cn">（第二部短片片名）</p>
+          <p class="film-en">Director · Screenwriter · Chia Guo</p>
+          <p class="film-dir-role">剧情短片 · 导演作品</p>
+          <a class="film-link" href="https://www.xinpianchang.com/a11730581?from=private_pwd" target="_blank">Watch on 新片场 →</a>
+        </div>
+        <div>
+          <div class="fest-item"><strong>BIFF 2022</strong>北京国际电影节 主单元</div>
+          <div class="fest-item"><strong>HCNW Film Festival</strong>Official Selection 2022</div>
+        </div>
+        <div>
+          <div class="fest-item"><strong>月度佳片 AME 2022</strong>Top Films of the Month</div>
+          <div class="fest-item"><strong>NIIFF 2023</strong>Viewer's Choice</div>
+        </div>
+      </div>
+    </div>
+    <div class="sound-row reveal">
+      <p class="sound-head">Music Films & Sound Work · 音乐影像 / 声音作品</p>
+      <div class="sound-films">
+        <div>
+          <p class="sound-film-title">《永安镇故事集》</p>
+          <p class="sound-role-tag">录音师 · 配乐制作人</p>
+          <p class="sound-fests">戛纳国际电影节 导演双周<br>布鲁塞尔国际电影节 评审团大奖<br>平遥国际电影节 费穆荣誉最佳导演</p>
+        </div>
+        <div>
+          <p class="sound-film-title">《内流河》</p>
+          <p class="sound-role-tag">声音指导 · 终混师</p>
+          <p class="sound-fests">重庆青年电影展 最佳导演<br>亚洲大学生电影节 主竞赛</p>
+        </div>
+        <div>
+          <p class="sound-film-title">《不净观》</p>
+          <p class="sound-role-tag">声音指导 · 终混师</p>
+          <p class="sound-fests">戛纳国际电影节 基石单元终审<br>入围罗德岛国际电影节</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="sec-head reveal" style="color:var(--ink);">
+      <span class="sec-num" style="color:#d0c8bc;">05</span>
+      <h2 class="sec-title" style="color:var(--ink);">Let's Work <em style="color:var(--mid)">合作</em></h2>
+      <span class="sec-title-cn" style="color:var(--mid);">Available · Shanghai · International</span>
+      <div class="sec-rule" style="background:#d0c8bc;"></div>
+    </div>
+    <div class="contact-wrap reveal">
+      <div>
+        <p class="contact-big">Open for<br><em>production,<br>1st AD &<br>creative work.</em></p>
+        <p class="contact-note">Based in Shanghai · Available internationally<br>Bilingual · Fast turnaround · Global network</p>
+      </div>
+      <div class="contact-fields">
+        <div class="cfield"><p class="cfield-label">Email</p><a href="mailto:your@email.com" class="cfield-val">your@email.com</a></div>
+        <div class="cfield"><p class="cfield-label">WeChat · 微信</p><p class="cfield-val">[ your wechat ID ]</p></div>
+        <div class="cfield"><p class="cfield-label">Company · 公司</p><p class="cfield-val">Radical Media — Shanghai</p></div>
+        <div class="cfield"><p class="cfield-label">Showreel · 样片</p><a href="#" class="cfield-val">View Reel →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-l">CHIA GUO 郭润家</p>
+  <p class="footer-r">Producer · Director · 1st AD · Shanghai · © 2025</p>
+</footer>
+
+<script>
+const els = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+els.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
